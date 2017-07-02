@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ProxyClock</string>
+    <string name="action_settings">Settings</string>
+    <string name="labelName">这里显示文本</string>
+</resources>

@@ -1,0 +1,50 @@
+// 设置请求的头
+urlConnection.setRequestProperty("Host", "192.168.100.169");
+urlConnection.setRequestProperty("Connection", "keep-alive");
+urlConnection.setRequestProperty("Content-Length", "47");
+urlConnection.setRequestProperty("Accept", "application/json, text/plain, */*");
+urlConnection.setRequestProperty("Origin", "file://");
+urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 7.1.1; " +
+        "TA-1000 Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/51.0.2704.106 Crosswalk/21.51.546.7 Mobile Safari/537.36");
+urlConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+urlConnection.setRequestProperty("Accept-Encoding", "gzip, deflate");
+urlConnection.setRequestProperty("Accept-Language", "zh-cn-#hans");
+
+{"TOKEN":"453665931a944071be8289961e3569f1","resultType":"1"}
+
+POST http://192.168.100.169/ws/saveCheckInfo HTTP/1.1
+Host: 192.168.100.169
+Connection: keep-alive
+Content-Length: 43
+Accept: application/json, text/plain, */*
+Origin: file://
+User-Agent: Mozilla/5.0 (Linux; Android 7.1.1; TA-1000 Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Crosswalk/21.51.546.7 Mobile Safari/537.36
+Authorization: 453665931a944071be8289961e3569f1
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-cn-#hans
+
+{"SLOC":["电通创意广场"],"ISAPP":"1"}
+
+GET http://192.168.100.169/ws/getCheckInfo HTTP/1.1
+Host: 192.168.100.169
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: 453665931a944071be8289961e3569f1
+User-Agent: Mozilla/5.0 (Linux; Android 7.1.1; TA-1000 Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Crosswalk/21.51.546.7 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-cn-#hans
+
+GET http://192.168.100.169/ws/getNotice HTTP/1.1
+Host: 192.168.100.169
+Connection: keep-alive
+Accept: application/json, text/plain, */*
+Authorization: 453665931a944071be8289961e3569f1
+User-Agent: Mozilla/5.0 (Linux; Android 7.1.1; TA-1000 Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Crosswalk/21.51.546.7 Mobile Safari/537.36
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-cn-#hans
+
+
+{"dataList":[{"SDATE":"2017-06-30","SATS":"09:45","SLOC":"Beijing","ISAPP":"1"},{"SDATE":"2017-06-30","SATS":"18:56:17","SLOC":"北京办事处","ISAPP":"1"}],"resultType":"1"}
+
