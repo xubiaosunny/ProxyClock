@@ -45,6 +45,8 @@ User-Agent: Mozilla/5.0 (Linux; Android 7.1.1; TA-1000 Build/NMF26F) AppleWebKit
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-cn-#hans
 
-
+{"dataList":[{"TITLE":"手机打卡APP设置方式","ID":"1460","CONTENT":"1. 确认是否已经开启了手机的GPS定位功能\r\n2. 苹果手机请在设备管理中找到BeiJing Hinge Software 并信任\r\n3. 请确认应用有使用GPS的权限\r\n4. 连接VPN之后还需要登陆用户认证系统验证\r\n5. 如果打卡界面未显示地图，不妨退出后重试一下","PUBTIME":"2016-11-01","CODENAME":"招聘类","NAME":"蓝汛控股集团"}],"resultType":"1"}
 {"dataList":[{"SDATE":"2017-06-30","SATS":"09:45","SLOC":"Beijing","ISAPP":"1"},{"SDATE":"2017-06-30","SATS":"18:56:17","SLOC":"北京办事处","ISAPP":"1"}],"resultType":"1"}
 
+{"dataList":[{"SDATE":"2017-06-30","SATS":"09:45","SLOC":"Beijing","ISAPP":"1"},{"SDATE":"2017-06-30","SATS":"18:56:17","SLOC":"北京办事处","ISAPP":"1"}],"resultType":"1"}
+{"dataList":[{"SDATE":"2017-06-30","SATS":"09:45","SLOC":"Beijing","ISAPP":"1"}],"resultType":"1"}

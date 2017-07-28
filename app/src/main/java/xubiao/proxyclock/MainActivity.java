@@ -22,7 +22,8 @@ import xubiao.proxyclock.utils.NetUtil;
 import android.webkit.WebView;
 import android.content.Context;
 import org.json.*;
-import java.util.ArrayList;
+import java.util.*;
+
 
 public class MainActivity extends AppCompatActivity {
     String mUserAgent;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "For emergency needs", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -81,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             TextView textusername = (TextView) findViewById(R.id.text_username);
             String username = textusername.getText().toString();
-            if (username.equals("biao.xu") || username.equals("wenzhe.hao")){
+            if (username.equals("biao.xu")
+                    || username.equals("wenzhe.hao")
+                    || username.equals("junkai.niu")
+                    || username.equals("qinggang.gao")
+                    || username.equals("zhenmin.wei")
+                    ){
                 switch (view.getId()){
                     case R.id.button_login:
                         login();
@@ -93,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                         getInfo();
                         break;
                 }
+            }else{
+                TextView textmessage = (TextView) findViewById(R.id.text_message);
+                textmessage.setText("无效的用户！！");
             }
         }
     }
@@ -138,12 +147,22 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //就是在主线程上操作,弹出结果
                         TextView textmessage = (TextView) findViewById(R.id.text_message);
+                        textmessage.setText("");
                         textmessage.setText(textmessage.getText(), TextView.BufferType.EDITABLE);
                         System.out.println(state);
+                        textmessage.append("-------------------------" + "\n");
                         try {
                             JSONObject jsonObject = new JSONObject(state);
-                            token = jsonObject.getString("TOKEN");
-                            textmessage.append("Token: " + token + "\n");
+                            String status = jsonObject.getString("resultType");
+                            System.out.println(status);
+                            if (status.equals("1")){
+                                token = jsonObject.getString("TOKEN");
+                                textmessage.append("auth success！！！my token is" + "\n");
+                                textmessage.append(token + "\n");
+                            }else{
+                                textmessage.append("auth failed" + "\n");
+                                textmessage.append(state + "\n");
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                             textmessage.append(e.toString() + "\n");
@@ -162,9 +181,7 @@ public class MainActivity extends AppCompatActivity {
     public void clock(){
         if(token==null){
             TextView textmessage = (TextView) findViewById(R.id.text_message);
-            textmessage.setText(textmessage.getText(), TextView.BufferType.EDITABLE);
-            textmessage.append("please auth first" + "\n");
-            textmessage.append("-------------------------" + "\n");
+            textmessage.setText("please auth first !!!" + "\n");
             return;
         }
         new Thread(new Runnable() {
@@ -207,8 +224,29 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //就是在主线程上操作,弹出结果
                         TextView textmessage = (TextView) findViewById(R.id.text_message);
+                        textmessage.setText("");
                         textmessage.setText(textmessage.getText(), TextView.BufferType.EDITABLE);
-                        textmessage.append(state + "\n");
+                        textmessage.append("-------------------------" + "\n");
+                        try {
+                            JSONObject jsonObject = new JSONObject(state);
+                            String status = jsonObject.getString("resultType");
+                            if (status.equals("1")){
+                                textmessage.append("clock success" + "\n");
+                                JSONArray data = jsonObject.getJSONArray("dataList");
+                                for (int j= 0;j<data.length();j++) {
+                                    JSONObject d = data.getJSONObject(j);
+                                    textmessage.append(d.getString("SDATE") + " " + d.getString("SATS")
+                                            + "   " + d.getString("SLOC") + "\n");
+                                }
+                            }else{
+                                textmessage.append("clock failed" + "\n");
+                                textmessage.append(state + "\n");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            textmessage.append(e.toString() + "\n");
+                        }
+                        textmessage.append("-------------------------" + "\n");
                         getNotice();
                         getInfo();
                     }
@@ -244,7 +282,25 @@ public class MainActivity extends AppCompatActivity {
                         //就是在主线程上操作,弹出结果
                         TextView textmessage = (TextView) findViewById(R.id.text_message);
                         textmessage.setText(textmessage.getText(), TextView.BufferType.EDITABLE);
-                        textmessage.append(state +"\n");
+                        try {
+                            JSONObject jsonObject = new JSONObject(state);
+                            String status = jsonObject.getString("resultType");
+                            if (status.equals("1")){
+                                textmessage.append("get clock info success！！！" + "\n");
+                                JSONArray data = jsonObject.getJSONArray("dataList");
+                                for (int j= 0;j<data.length();j++){
+                                    JSONObject d = data.getJSONObject(j);
+                                    textmessage.append(d.getString("SDATE") + " " + d.getString("SATS")
+                                            + "   " + d.getString("SLOC")  + "\n");
+                                }
+                            }else{
+                                textmessage.append("get clock info failed" + "\n");
+                                textmessage.append(state + "\n");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            textmessage.append(e.toString() + "\n");
+                        }
                         textmessage.append("-------------------------" + "\n");
                     }
                 });
@@ -276,7 +332,26 @@ public class MainActivity extends AppCompatActivity {
                         //就是在主线程上操作,弹出结果
                         TextView textmessage = (TextView) findViewById(R.id.text_message);
                         textmessage.setText(textmessage.getText(), TextView.BufferType.EDITABLE);
-                        textmessage.append(state + "\n");
+                        try {
+                            JSONObject jsonObject = new JSONObject(state);
+                            String status = jsonObject.getString("resultType");
+                            if (status.equals("1")){
+                                JSONArray data = jsonObject.getJSONArray("dataList");
+                                textmessage.append("get notice success！！！" + "\n");
+                                for (int j= 0;j<data.length();j++){
+                                    JSONObject d = data.getJSONObject(j);
+                                    textmessage.append(d.getString("TITLE")+ "  " + d.getString("PUBTIME") + "\n");
+                                    textmessage.append(d.getString("CONTENT")+ "\n");
+                                    textmessage.append("\n");
+                                }
+                            }else{
+                                textmessage.append("get notice failed" + "\n");
+                                textmessage.append(state + "\n");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            textmessage.append(e.toString() + "\n");
+                        }
                         textmessage.append("-------------------------" + "\n");
                     }
                 });
